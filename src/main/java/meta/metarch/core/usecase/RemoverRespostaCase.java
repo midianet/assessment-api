@@ -1,4 +1,4 @@
 package meta.metarch.core.usecase;
 
-public class RemoverResposta {
+public class RemoverRespostaCase {
 }

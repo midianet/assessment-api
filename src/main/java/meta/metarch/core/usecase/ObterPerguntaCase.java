@@ -1,2 +1,5 @@
-package meta.metarch.core.usecase;public class ObterPerguntaPorID {
+package meta.metarch.core.usecase;
+
+public class ObterPerguntaCase {
+
 }
