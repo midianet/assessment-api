@@ -4,15 +4,15 @@ import jakarta.transaction.Transactional;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.RequiredArgsConstructor;
-import meta.metarch.core.model.Disciplina;
-import meta.metarch.infra.database.DisciplinaRepository;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
+
+import meta.metarch.core.model.Disciplina;
+import meta.metarch.infra.database.DisciplinaRepository;
 
 @Service
 @RequiredArgsConstructor
 public class CriarDisciplinaCase {
-
     private final DisciplinaRepository repository;
 
     @Transactional
@@ -30,5 +30,4 @@ public class CriarDisciplinaCase {
     ){}
 
     //public record Out(Long id,String nome){}
-
 }

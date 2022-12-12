@@ -1,2 +1,5 @@
-package meta.metarch.core.usecase;public class GerarGraficoCase {
+package meta.metarch.core.usecase;
+
+public class GerarGraficoCase {
+
 }

@@ -1,2 +1,5 @@
-package meta.metarch.core.usecase;public class ListarProjetoCase {
+package meta.metarch.core.usecase;
+
+public class ListarProjetoCase {
+
 }
