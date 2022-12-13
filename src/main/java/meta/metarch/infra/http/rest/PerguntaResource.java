@@ -18,19 +18,17 @@ import meta.metarch.core.usecase.*;
 @CrossOrigin("*")
 @RequiredArgsConstructor
 @RequestMapping(value = "/perguntas")
-
 public class PerguntaResource {
-
     private final CriarPerguntaCase criar;
     private final AlterarPerguntaCase alterar;
     private final RemoverPerguntaCase remover;
     private final ObterPerguntaCase obter;
-
     private final ListarPerguntaCase listar;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Pergunta create(@RequestBody final CriarPerguntaCase.In pergunta, final HttpServletResponse response){
+    public Pergunta create(@RequestBody final CriarPerguntaCase.In pergunta,
+                           final HttpServletResponse response){
         final var created = criar.execute(pergunta);
         response.setHeader(HttpHeaders.LOCATION, ServletUriComponentsBuilder
                 .fromCurrentRequest()
@@ -42,7 +40,8 @@ public class PerguntaResource {
     }
 
     @PutMapping("/{id}")
-    public void put(@PathVariable final Long id, @Valid @RequestBody final AlterarPerguntaCase.In pergunta) {
+    public void put(@PathVariable final Long id,
+                    @Valid @RequestBody final AlterarPerguntaCase.In pergunta) {
         alterar.execute(id,pergunta);
     }
 

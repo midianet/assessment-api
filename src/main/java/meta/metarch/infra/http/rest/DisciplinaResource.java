@@ -20,17 +20,16 @@ import meta.metarch.core.usecase.*;
 @RequestMapping(value = "/disciplinas")
 
 public class DisciplinaResource {
-
     private final CriarDisciplinaCase criar;
     private final AlterarDisciplinaCase alterar;
     private final RemoverDisciplinaCase remover;
     private final ObterDisciplinaCase obter;
-
     private final ListarDisciplinaCase listar;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Disciplina create(@RequestBody @Valid final CriarDisciplinaCase.In disciplina, final HttpServletResponse response){
+    public Disciplina create(@RequestBody @Valid final CriarDisciplinaCase.In disciplina,
+                             final HttpServletResponse response){
         final var created = criar.execute(disciplina);
         response.setHeader(HttpHeaders.LOCATION, ServletUriComponentsBuilder
                 .fromCurrentRequest()
@@ -42,7 +41,8 @@ public class DisciplinaResource {
     }
 
     @PutMapping("/{id}")
-    public void put(@PathVariable final Long id, @Valid @RequestBody final AlterarDisciplinaCase.In disciplina) {
+    public void put(@PathVariable final Long id,
+                    @Valid @RequestBody final AlterarDisciplinaCase.In disciplina) {
         alterar.execute(id,disciplina);
     }
 
