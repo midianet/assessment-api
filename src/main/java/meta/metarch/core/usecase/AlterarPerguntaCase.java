@@ -24,5 +24,5 @@ public class AlterarPerguntaCase {
         repository.save(persistent);
     }
 
-    public record In(String nome, Long disciplinaId){}
+    public record In(String texto, String ajuda, Long disciplinaId){}
 }

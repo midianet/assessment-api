@@ -1,11 +1,31 @@
 package meta.metarch.core.model;
 
-public record Assessment(
-  Long disciplinaId,
-  String disciplinaNome,
-  Long perguntaId,
-  String perguntaTexto,
-  String perguntaAjuda,
-  Long respostaId,
-  Long respostaProjetoId,
-  Resposta.Maturidade RespostaMaturidade){}
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.RequiredArgsConstructor;
+
+import java.util.List;
+
+@Data
+@Builder
+@AllArgsConstructor
+@RequiredArgsConstructor
+public class Assessment{
+    private List<Grupo> grupos;
+    public record Grupo(
+        Long id,
+        String nome,
+        List<Elemento> elementos){}
+
+    public record Elemento(
+       Long id,
+       Long perguntaId,
+       String perguntaTexto,
+       String perguntaAjuda,
+       Resposta.Maturidade maturidade
+    ){}
+
+    public record Radar(String grupo, Double valor){}
+
+}

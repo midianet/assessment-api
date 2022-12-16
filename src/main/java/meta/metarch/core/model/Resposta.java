@@ -29,7 +29,8 @@ public class Resposta {
     private Pergunta pergunta;
 
     @NotNull
-    @Column(nullable = false)
+    @Column(nullable = false, length = 15)
+    @Enumerated(EnumType.STRING)
     private Maturidade maturidade;
 
     @AllArgsConstructor

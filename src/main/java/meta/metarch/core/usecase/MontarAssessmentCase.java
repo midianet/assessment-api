@@ -3,14 +3,15 @@ package meta.metarch.core.usecase;
 
 import lombok.RequiredArgsConstructor;
 import meta.metarch.core.model.Assessment;
+import meta.metarch.infra.database.data.AssessmentData;
 import meta.metarch.infra.database.RespostaRepository;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -20,17 +21,35 @@ public class MontarAssessmentCase {
     private final ObterDisciplinaCase obterDisciplina;
     private final ObterProjetoCase obterProjeto;
 
-    public Page<Assessment> execute(@NonNull  final Long projetoId,
-                                    @Nullable final Long disciplinaId,
-                                    @NonNull  final Pageable page){
-
+    public Assessment execute(@NonNull  final Long projetoId,
+                                    @Nullable final Long disciplinaId){
+        obterProjeto.execute(projetoId);
+        List<AssessmentData> data;
         if(Objects.nonNull(disciplinaId)){
             obterDisciplina.execute(disciplinaId);
-            return repository.montarAssessment(projetoId,disciplinaId,page);
+            data = repository.montarAssessmentData(projetoId,disciplinaId);
         }else{
-            obterProjeto.execute(projetoId);
-            return repository.montarAssessment(projetoId,page);
+            data = repository.montarAssessmentData(projetoId);
         }
+        return Assessment.builder()
+            .grupos(data.stream()
+                .collect(Collectors.groupingBy(AssessmentData::disciplinaId))
+                .entrySet().stream()
+                    .map(grupo -> new Assessment.Grupo(
+                        grupo.getKey(),
+                        grupo.getValue().stream()
+                            .findFirst()
+                            .orElseThrow(() -> new RuntimeException("Grupo Sem elementos")).disciplinaNome(),
+                        grupo.getValue().stream()
+                            .map(resposta -> new Assessment.Elemento(
+                                resposta.respostaId(),
+                                resposta.perguntaId(),
+                                resposta.perguntaTexto(),
+                                resposta.perguntaAjuda(),
+                                resposta.maturidade()))
+                    .toList()))
+                .toList())
+            .build();
     }
 
 }
