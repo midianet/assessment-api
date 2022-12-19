@@ -12,13 +12,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class Application {
 
 
-    @Autowired
-    private MontarRadarCase montarRadar;
+//    @Autowired
+//    private MontarRadarCase montarRadar;
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }
 
-    @PostConstruct
+    //@PostConstruct
     public void teste(){
         //var x = montarRadar.execute(2L);
         //System.out.println(x);

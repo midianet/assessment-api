@@ -22,7 +22,7 @@ public class MontarAssessmentCase {
     private final ObterProjetoCase obterProjeto;
 
     public Assessment execute(@NonNull  final Long projetoId,
-                                    @Nullable final Long disciplinaId){
+                              @Nullable final Long disciplinaId){
         obterProjeto.execute(projetoId);
         List<AssessmentData> data;
         if(Objects.nonNull(disciplinaId)){
