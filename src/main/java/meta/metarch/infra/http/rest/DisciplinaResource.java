@@ -8,12 +8,14 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import meta.metarch.core.model.Disciplina;
 import meta.metarch.core.usecase.*;
 
+@Validated
 @RestController
 @CrossOrigin("*")
 @RequiredArgsConstructor
@@ -28,7 +30,7 @@ public class DisciplinaResource {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Disciplina create(@RequestBody @Valid final CriarDisciplinaCase.In disciplina,
+    public Disciplina create(@Valid @RequestBody final CriarDisciplinaCase.In disciplina,
                              final HttpServletResponse response){
         final var created = criar.execute(disciplina);
         response.setHeader(HttpHeaders.LOCATION, ServletUriComponentsBuilder

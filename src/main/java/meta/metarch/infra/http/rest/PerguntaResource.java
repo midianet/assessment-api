@@ -8,12 +8,14 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import meta.metarch.core.model.Pergunta;
 import meta.metarch.core.usecase.*;
 
+@Validated
 @RestController
 @CrossOrigin("*")
 @RequiredArgsConstructor
@@ -27,7 +29,7 @@ public class PerguntaResource {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Pergunta create(@RequestBody final CriarPerguntaCase.In pergunta,
+    public Pergunta create(@Valid @RequestBody final CriarPerguntaCase.In pergunta,
                            final HttpServletResponse response){
         final var created = criar.execute(pergunta);
         response.setHeader(HttpHeaders.LOCATION, ServletUriComponentsBuilder

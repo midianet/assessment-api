@@ -10,9 +10,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+@Validated
 @RestController
 @CrossOrigin("*")
 @RequiredArgsConstructor
@@ -26,7 +28,7 @@ public class ProjetoResource {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Projeto create(@RequestBody final CriarProjetoCase.In projeto,
+    public Projeto create(@Valid @RequestBody final CriarProjetoCase.In projeto,
                           final HttpServletResponse response){
         final var created = criar.execute(projeto);
         response.setHeader(HttpHeaders.LOCATION, ServletUriComponentsBuilder

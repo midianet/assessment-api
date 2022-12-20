@@ -1,15 +1,17 @@
 package meta.metarch.infra.http.rest;
 
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
-import meta.metarch.core.model.Resposta;
 import meta.metarch.core.usecase.SalvarRespostaCase;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+@Validated
 @RestController
 @CrossOrigin("*")
 @RequiredArgsConstructor
@@ -21,7 +23,7 @@ public class RespostaResource {
     @PostMapping("/{projetoId}")
     @ResponseStatus(HttpStatus.CREATED)
     public Long create(@PathVariable final Long projetoId,
-                       @RequestBody final SalvarRespostaCase.In resposta,
+                       @Valid @RequestBody final SalvarRespostaCase.In resposta,
                        final HttpServletResponse response){
         final var created = salvar.execute(projetoId,resposta);
         response.setHeader(HttpHeaders.LOCATION, ServletUriComponentsBuilder

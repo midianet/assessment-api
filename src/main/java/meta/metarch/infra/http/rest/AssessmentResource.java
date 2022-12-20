@@ -1,6 +1,7 @@
 package meta.metarch.infra.http.rest;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import meta.metarch.core.usecase.MontarRadarCase;
@@ -8,6 +9,8 @@ import meta.metarch.core.model.Assessment;
 import meta.metarch.core.usecase.MontarAssessmentCase;
 
 import java.util.List;
+
+@Validated
 @RestController
 @CrossOrigin("*")
 @RequiredArgsConstructor

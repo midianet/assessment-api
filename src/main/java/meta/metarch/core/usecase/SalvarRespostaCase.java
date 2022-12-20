@@ -1,5 +1,6 @@
 package meta.metarch.core.usecase;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import meta.metarch.core.model.Resposta;
@@ -25,6 +26,6 @@ public class SalvarRespostaCase {
          persistent.setMaturidade(resposta.maturidade);
          return repository.save(persistent);
     }
-    public record In(Long perguntaId, Resposta.Maturidade maturidade){}
+    public record In(@NotNull Long perguntaId, @NotNull Resposta.Maturidade maturidade){}
 
 }
